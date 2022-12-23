@@ -10,6 +10,10 @@ public class Player {
 
     private int coinPosition;
 
+    private static Board gameBoard = new Board(); // static becoz both playes playin gon same board
+
+
+
     public Player(int tileSize, Color coinColor, String playerName){ //constructor
         coinPosition = 1;  // game starts with one
         name = playerName;
