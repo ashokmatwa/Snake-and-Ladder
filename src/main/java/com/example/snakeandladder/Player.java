@@ -23,6 +23,15 @@ public class Player {
         coin.setTranslateY(380);  // 400-20 = 380 for y axis
     }
 
+    public void movePlayer(int diceValue){
+        if(coinPosition + diceValue <= 100){  //out of board
+            coinPosition += diceValue;
+
+            coin.setTranslateX(gameBoard.getXCoordiantes(coinPosition));
+            coin.setTranslateY(gameBoard.getYCoordiantes(coinPosition));
+        }
+    }
+
     public Circle getCoin() {
         return coin;
     }
