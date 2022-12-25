@@ -54,6 +54,8 @@ public class SnakeLadder extends Application {
             public void handle(ActionEvent actionEvent) {
                 if(gameStarted){
                     if(firstPlayerTurn){
+                        firstPlayerTurn = false;
+                        secondPlayerTurn = true;
                         setDiceValue();  // calling function to roll dice
                         firstPlayer.movePlayer(diceValue);
                         if(firstPlayer.playerWon() != null){
@@ -63,9 +65,11 @@ public class SnakeLadder extends Application {
                             gameStarted = false;
                             startGameButton.setDisable(false);
                             startGameButton.setText("Start game");
+//                            firstPlayer.reset();
+//                            secondPlayer.reset();
                         }
-                        firstPlayerTurn = false;
-                        secondPlayerTurn = true;
+//                        firstPlayerTurn = false;
+//                        secondPlayerTurn = true;
                     }
                 }
             }
@@ -80,6 +84,8 @@ public class SnakeLadder extends Application {
             public void handle(ActionEvent actionEvent) {
                 if(gameStarted){
                     if(secondPlayerTurn){
+                        firstPlayerTurn = true;
+                        secondPlayerTurn = false;
                         setDiceValue(); // calling function to roll dice
                         secondPlayer.movePlayer(diceValue);
                         if(secondPlayer.playerWon() != null){
@@ -89,9 +95,11 @@ public class SnakeLadder extends Application {
                             gameStarted = false;
                             startGameButton.setDisable(false);
                             startGameButton.setText("Start game");
+//                            firstPlayer.reset();
+//                            secondPlayer.reset();
                         }
-                        firstPlayerTurn = true;
-                        secondPlayerTurn = false;
+//                        firstPlayerTurn = true;
+//                        secondPlayerTurn = false;
                     }
                 }
             }
@@ -106,6 +114,8 @@ public class SnakeLadder extends Application {
                 gameStarted = true;
                 startGameButton.setText("Ongoing game");
                 startGameButton.setDisable(true);
+                firstPlayer.reset();
+                secondPlayer.reset();
             }
         });
 

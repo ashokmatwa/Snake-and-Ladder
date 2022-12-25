@@ -11,6 +11,7 @@ public class Board {
     public Board() {
       //  this.positionCoordinates = positionCoordinates; // whenever object created it get called
         populatePositionCoordinates();  // to position arranged
+        populateSnakeLadderPosition();
     }
 
     private void populatePositionCoordinates(){

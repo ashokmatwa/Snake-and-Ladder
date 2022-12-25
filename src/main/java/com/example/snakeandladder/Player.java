@@ -44,6 +44,11 @@ public class Player {
             }
         }
     }
+    //adddddd
+    public void reset(){
+        coinPosition = 1;
+        translatePlayer();
+    }
 
     //animate functionality ---> moving dice smoothly
     private void translatePlayer(){
