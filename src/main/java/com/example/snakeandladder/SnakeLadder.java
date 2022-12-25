@@ -30,7 +30,7 @@ public class SnakeLadder extends Application {
     Player secondPlayer = new Player(tileSize-10, Color.WHITE, "Bittu"); // size decrese to avoid  the case when they are at same postion
     Pane createContent(){
         Pane root = new Pane();
-        root.setPrefSize(width*tileSize, height*tileSize+50);
+        root.setPrefSize(width*tileSize, height*tileSize+100);
 
         for (int i=0;i<width;i++){
             for(int j=0;j<height;j++){
