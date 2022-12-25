@@ -20,8 +20,11 @@ public class SnakeLadder extends Application {
     public static  final int tileSize = 40, height = 10, width = 10;
     int lowerLine = tileSize*height;
 
-    int diceValue;
-    Label rolledDiceValueLabel;
+    int diceValue;  // dice value after randomise
+    Label rolledDiceValueLabel; // for labelling
+
+    boolean firstPlayerTurn = true, secondPlayerTurn = false, gameStarted = false;
+    Button startGameButton;
 
     Player firstPlayer = new Player(tileSize, Color.BLACK, "Ashok");
     Player secondPlayer = new Player(tileSize-10, Color.WHITE, "Bittu"); // size decrese to avoid  the case when they are at same postion
@@ -49,8 +52,22 @@ public class SnakeLadder extends Application {
         playerOneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                setDiceValue();
-                firstPlayer.movePlayer(diceValue);
+                if(gameStarted){
+                    if(firstPlayerTurn){
+                        setDiceValue();  // calling function to roll dice
+                        firstPlayer.movePlayer(diceValue);
+                        if(firstPlayer.playerWon() != null){
+                            rolledDiceValueLabel.setText(firstPlayer.playerWon());
+                            firstPlayerTurn = true;
+                            secondPlayerTurn = false;
+                            gameStarted = false;
+                            startGameButton.setDisable(false);
+                            startGameButton.setText("Start game");
+                        }
+                        firstPlayerTurn = false;
+                        secondPlayerTurn = true;
+                    }
+                }
             }
         });
 
@@ -61,16 +78,43 @@ public class SnakeLadder extends Application {
         playerTwoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                setDiceValue();
-                secondPlayer.movePlayer(diceValue);
+                if(gameStarted){
+                    if(secondPlayerTurn){
+                        setDiceValue(); // calling function to roll dice
+                        secondPlayer.movePlayer(diceValue);
+                        if(secondPlayer.playerWon() != null){
+                            rolledDiceValueLabel.setText(secondPlayer.playerWon());
+                            firstPlayerTurn = true;
+                            secondPlayerTurn = false;
+                            gameStarted = false;
+                            startGameButton.setDisable(false);
+                            startGameButton.setText("Start game");
+                        }
+                        firstPlayerTurn = true;
+                        secondPlayerTurn = false;
+                    }
+                }
             }
         });
 
+        startGameButton = new Button("Start");
+        startGameButton.setTranslateX(130);
+        startGameButton.setTranslateY(lowerLine+50);
+        startGameButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                gameStarted = true;
+                startGameButton.setText("Ongoing game");
+                startGameButton.setDisable(true);
+            }
+        });
+
+
         rolledDiceValueLabel = new Label("Start the game");
         rolledDiceValueLabel.setTranslateY(lowerLine+20);
-        rolledDiceValueLabel.setTranslateX(140);
+        rolledDiceValueLabel.setTranslateX(130);
 
-        root.getChildren().addAll(boardImage, playerOneButton, playerTwoButton, firstPlayer.getCoin(), secondPlayer.getCoin(), rolledDiceValueLabel);
+        root.getChildren().addAll(boardImage, playerOneButton, playerTwoButton, firstPlayer.getCoin(), secondPlayer.getCoin(), rolledDiceValueLabel, startGameButton);
 
         return root;
     }
