@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
+
 public class SnakeLadder extends Application {
 
 
@@ -27,7 +29,8 @@ public class SnakeLadder extends Application {
     Button startGameButton;
 
     Player firstPlayer = new Player(tileSize, Color.BLACK, "Ashok");
-    Player secondPlayer = new Player(tileSize-10, Color.WHITE, "Bittu"); // size decrese to avoid  the case when they are at same postion
+    Player secondPlayer = new Player(tileSize, Color.WHITE, "Bittu"); // size decrese to avoid  the case when they are at same postion
+    //tilesize-10 to show alag alag
     Pane createContent(){
         Pane root = new Pane();
         root.setPrefSize(width*tileSize, height*tileSize+100);
@@ -47,13 +50,16 @@ public class SnakeLadder extends Application {
         boardImage.setFitHeight(tileSize*height);
 
         Button playerOneButton = new Button("Player One");
-        playerOneButton.setTranslateX(20);
+//        Button playerOneButton = new Button(firstPlayer.getName());
+        playerOneButton.setTranslateX(40);
         playerOneButton.setTranslateY(lowerLine+20);
+        playerOneButton.setStyle("-fx-background-color: #C0C0C0;");
         playerOneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(gameStarted){
                     if(firstPlayerTurn){
+                       // playerOneButton.setDisable(true);
                         firstPlayerTurn = false;
                         secondPlayerTurn = true;
                         setDiceValue();  // calling function to roll dice
@@ -64,7 +70,7 @@ public class SnakeLadder extends Application {
                             secondPlayerTurn = false;
                             gameStarted = false;
                             startGameButton.setDisable(false);
-                            startGameButton.setText("Start game");
+                            startGameButton.setText("Re-Start game");
 //                            firstPlayer.reset();
 //                            secondPlayer.reset();
                         }
@@ -77,8 +83,10 @@ public class SnakeLadder extends Application {
 
 
         Button playerTwoButton = new Button("Player Two");
-        playerTwoButton.setTranslateX(250);
+        //Button playerOneButton = new Button(secondPlayer.getName());
+        playerTwoButton.setTranslateX(290);
         playerTwoButton.setTranslateY(lowerLine+20);
+        playerTwoButton.setStyle("-fx-background-color: #C0C0C0;");
         playerTwoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -94,7 +102,7 @@ public class SnakeLadder extends Application {
                             secondPlayerTurn = false;
                             gameStarted = false;
                             startGameButton.setDisable(false);
-                            startGameButton.setText("Start game");
+                            startGameButton.setText("Re-Start game");
 //                            firstPlayer.reset();
 //                            secondPlayer.reset();
                         }
@@ -106,13 +114,15 @@ public class SnakeLadder extends Application {
         });
 
         startGameButton = new Button("Start");
-        startGameButton.setTranslateX(130);
+        startGameButton.setTranslateX(170);
         startGameButton.setTranslateY(lowerLine+50);
+        startGameButton.setStyle("-fx-background-color: #C0C0C0; ");
         startGameButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 gameStarted = true;
                 startGameButton.setText("Ongoing game");
+                rolledDiceValueLabel.setText("Game has started"); //added
                 startGameButton.setDisable(true);
                 firstPlayer.reset();
                 secondPlayer.reset();
@@ -122,7 +132,7 @@ public class SnakeLadder extends Application {
 
         rolledDiceValueLabel = new Label("Start the game");
         rolledDiceValueLabel.setTranslateY(lowerLine+20);
-        rolledDiceValueLabel.setTranslateX(130);
+        rolledDiceValueLabel.setTranslateX(150);
 
         root.getChildren().addAll(boardImage, playerOneButton, playerTwoButton, firstPlayer.getCoin(), secondPlayer.getCoin(), rolledDiceValueLabel, startGameButton);
 
@@ -131,7 +141,7 @@ public class SnakeLadder extends Application {
 
     private void setDiceValue(){
         diceValue = (int) (Math.random()*6+1);
-        rolledDiceValueLabel.setText("Dice Value : "+ diceValue);
+        rolledDiceValueLabel.setText("Dice Value : "+ diceValue); // can add players also --> passing by parameters
     }
     @Override
     public void start(Stage stage) throws IOException {

@@ -18,15 +18,18 @@ public class Player {
 
 
     public Player(int tileSize, Color coinColor, String playerName){ //constructor
-        coinPosition = 1;  // game starts with one
+        coinPosition = 0;  // game starts with one--> zero(my)
         name = playerName;
         coin = new Circle(tileSize/2);
         coin.setFill(coinColor);
-        coin.setTranslateX(20);   // coin size 1*40-20 =20 so put it on its centre 0+20
-        coin.setTranslateY(380);  // 10*40-20 = 380 for y axis
+//        coin.setTranslateX(20);   // coin size 1*40-20 =20 so put it on its centre 0+20
+//        coin.setTranslateY(380);  // 10*40-20 = 380 for y axis
 
         //x = 1 * tilesize - tilesize/2
         //y = 10 * tilesize - tilesize/2
+       // coin.setTranslateX(1 * tileSize - tileSize/2);
+        coin.setTranslateX(- tileSize/2); // to come from outside the board
+        coin.setTranslateY(10 * tileSize - tileSize/2);
     }
 
     public void movePlayer(int diceValue){  // move --> what is the value comes on dice
@@ -46,7 +49,7 @@ public class Player {
     }
     //adddddd
     public void reset(){
-        coinPosition = 1;
+        coinPosition = 0;
         translatePlayer();
     }
 

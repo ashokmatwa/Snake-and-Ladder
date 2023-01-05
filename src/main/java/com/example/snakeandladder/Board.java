@@ -16,7 +16,8 @@ public class Board {
 
     private void populatePositionCoordinates(){
         positionCoordinates = new ArrayList<>(); // new object;
-        positionCoordinates.add(new Pair<Integer,Integer>(0, 0));  //for 1st index
+       // positionCoordinates.add(new Pair<Integer,Integer>(0, 0));  //for 1st index
+        positionCoordinates.add(new Pair<Integer,Integer>(- SnakeLadder.tileSize/2, 10 * SnakeLadder.tileSize - SnakeLadder.tileSize/2)); //to set at 0
 
         int x=1, y=10, xPos, yPos;
         for(int i=0;i<SnakeLadder.height;i++){
